@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <style>
+    body {
+      width: 350px;
+      padding: 20px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      margin: 0;
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    
+    .logo {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 10px;
+      background: linear-gradient(135deg, #0077b5, #00a0dc);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 20px;
+    }
+    
+    h1 {
+      font-size: 18px;
+      margin: 0;
+      color: #333;
+    }
+    
+    .subtitle {
+      font-size: 12px;
+      color: #666;
+      margin-top: 5px;
+    }
+    
+    .status-card {
+      background: #f8f9fa;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 20px 0;
+      border-left: 4px solid #e5e7eb;
+    }
+    
+    .status-card.success {
+      background: #f0fdf4;
+      border-left-color: #22c55e;
+    }
+    
+    .status-card.warning {
+      background: #fffbeb;
+      border-left-color: #f59e0b;
+    }
+    
+    .status-card.error {
+      background: #fef2f2;
+      border-left-color: #ef4444;
+    }
+    
+    .status-card.info {
+      background: #eff6ff;
+      border-left-color: #3b82f6;
+    }
+    
+    .status-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    
+    .status-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: bold;
+    }
+    
+    .status-icon.success {
+      background: #22c55e;
+      color: white;
+    }
+    
+    .status-icon.warning {
+      background: #f59e0b;
+      color: white;
+    }
+    
+    .status-icon.error {
+      background: #ef4444;
+      color: white;
+    }
+    
+    .status-icon.info {
+      background: #3b82f6;
+      color: white;
+    }
+    
+    .status-title {
+      font-weight: 600;
+      font-size: 14px;
+    }
+    
+    .status-message {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.4;
+    }
+    
+    .status-details {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(0,0,0,0.1);
+      font-size: 12px;
+      color: #666;
+    }
+    
+    .status-detail-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+    
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      margin-bottom: 10px;
+      transition: all 0.2s;
+    }
+    
+    .btn-primary {
+      background: #0077b5;
+      color: white;
+    }
+    
+    .btn-primary:hover:not(:disabled) {
+      background: #005885;
+      transform: translateY(-1px);
+    }
+    
+    .btn-secondary {
+      background: #f3f4f6;
+      color: #374151;
+      border: 1px solid #d1d5db;
+    }
+    
+    .btn-secondary:hover:not(:disabled) {
+      background: #e5e7eb;
+    }
+    
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+    
+    .loading {
+      display: none;
+      text-align: center;
+      padding: 20px;
+      color: #666;
+    }
+    
+    .loading.show {
+      display: block;
+    }
+    
+    .spinner {
+      width: 20px;
+      height: 20px;
+      border: 2px solid #f3f3f3;
+      border-top: 2px solid #0077b5;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 10px;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .instructions {
+      font-size: 12px;
+      color: #666;
+      line-height: 1.4;
+      margin-top: 20px;
+      padding-top: 15px;
+      border-top: 1px solid #e5e7eb;
+    }
+    
+    .auto-badge {
+      display: inline-block;
+      background: #22c55e;
+      color: white;
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 500;
+      margin-left: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">LI</div>
+    <h1>LinkedIn Cookie Sync</h1>
+    <div class="subtitle">for Headhunting Agent</div>
+  </div>
+
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+    <div>Checking status...</div>
+  </div>
+
+  <div class="status-card" id="statusCard">
+    <div class="status-header">
+      <div class="status-icon" id="statusIcon">?</div>
+      <div class="status-title" id="statusTitle">Checking...</div>
+    </div>
+    <div class="status-message" id="statusMessage">Please wait while we check your LinkedIn cookies...</div>
+    <div class="status-details" id="statusDetails" style="display: none;">
+      <div class="status-detail-row">
+        <span>Cookies:</span>
+        <span id="cookieCount">-</span>
+      </div>
+      <div class="status-detail-row">
+        <span>Last Updated:</span>
+        <span id="lastUpdated">-</span>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn-primary" id="syncBtn" disabled>Sync to Web App</button>
+  <button class="btn-secondary" id="refreshBtn">Refresh Status</button>
+
+  <div class="instructions">
+    <strong>🚀 Fully Automatic!</strong><br>
+    This extension automatically captures your LinkedIn cookies when you visit LinkedIn. Just open your headhunting agent app and click "Sync to Web App" when ready.
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
