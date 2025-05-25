@@ -88,7 +88,7 @@ The extension popup shows real-time status:
 
 ### Supported Domains
 - `http://localhost:*` (development)
-- `https://*.vercel.app` (production)
+- `https://headhunter-agent-playground.vercel.app` (production)
 
 ### Key Cookies Captured
 - Authentication cookies (`li_at`, `JSESSIONID`)

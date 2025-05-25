@@ -10,8 +10,7 @@
     ],
     "host_permissions": [
       "https://*.linkedin.com/*",
-      "http://localhost:*/*",
-      "https://*.vercel.app/*"
+      "https://headhunter-agent-playground.vercel.app/*"
     ],
     "background": {
       "service_worker": "background.js"
@@ -24,7 +23,6 @@
       },
       {
         "matches": [
-          "http://localhost:*/*",
           "https://headhunter-agent-playground.vercel.app/*"
         ],
         "js": ["agent-content.js"],
@@ -43,7 +41,7 @@
     "web_accessible_resources": [
       {
         "resources": ["content.js", "agent-content.js", "bridge.js"],
-        "matches": ["https://*.linkedin.com/*", "http://localhost:*/*", "https://*.vercel.app/*"]
+        "matches": ["https://*.linkedin.com/*", "https://headhunter-agent-playground.vercel.app/*"]
       }
     ]
 }
